@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KLAN</title>
+</head>
+<body>
+    {% load static %}
+    <header>
+        <div class="headpart">
+            <img class="logo" src="{% static 'img/ans_post/c_log.png' %}">
+            <h1 class="title">Klan</h1>
+            <img class="profile_icon" src="{% static 'img/ans_post/pro.png' %}">
+        </div>
+    </header>
+    <div class="profile_bar">
+        <ul>
+            <li>{{ data.s_fname }} {{ data.r_no }}</li>
+            <li><a href="{% url 'liba' %}">Library</a></li>
+            <li><a href="{% url 'logout' %}">Log out</a></li>
+
+        </ul>
+    </div>
+    <div class="menu_bar">
+        <div class="home_but">
+            <h5>Home</h5>
+            <img class="home_icon" src="{% static 'img/ans_post/home_icon.svg' %}">
+        </div>
+        <a href="{% url 'ask' %}">
+            <div class="ask_but">
+                <h5>Ask</h5>
+                <img src="{% static 'img/ans_post/ask_icon.svg' %}">
+            </div>
+        </a>
+        <a href="{% url 'answer_page'%}">
+            <div class="ans_but">
+                <h5>Answer</h5>
+                <img src="{% static 'img/ans_post/answer_icon.svg' %}">
+            </div>
+        </a>
+        <a href="{% url 'notf' %}">
+            <div class="notf">
+                <h5>Notifications</h5>
+            </div>
+        </a>
+        <div class="image">
+            <img src="{% static 'img/ans_post/draw.svg' %}">
+        </div>
+    </div>
+    <div class="qu_dis">
+        {% for a in libb %}
+            <div class="qu_set">
+                <a href="{% url 'ques' a.q_id.q_id %}">
+                    <h6>{{ a.q_id.s_id.s_fname }} {{ a.q_id.s_id.r_no }}</h6>
+                    <h6>{{ a.q_id.s_id.dept }} {{ a.q_id.domain }}</h6>
+                    <h4>{{ a.q_id.q_text }}</h4>
+                </a>
+            </div>
+        {% endfor %}
+    </div>
+    <footer>
+        <div class="footerpart">
+            <img src="{% static 'img/shome/co_logo.svg' %}">
+            <img src="{% static 'img/shome/follow.svg' %}">
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KLAN</title>
+</head>
+<body>
+    {% load static %}
+    <header>
+        <div class="headpart">
+            <img class="logo" src="{% static 'img/ans_post/c_log.png' %}">
+            <h1 class="title">Klan</h1>
+            <img class="profile_icon" src="{% static 'img/ans_post/pro.png' %}">
+        </div>
+    </header>
+    <div class="profile_bar">
+        <ul>
+            <li>{{ data.s_fname }} {{ data.r_no }}</li>
+            <li><a href="{% url 'liba' %}">Library</a></li>
+            <li><a href="{% url 'logout' %}">Log out</a></li>
+
+        </ul>
+    </div>
+    <div class="menu_bar">
+        <a href="{% url 'home'}">
+            <div class="home_but">
+                <h5>Home</h5>
+                <img class="home_icon" src="{% static 'img/ans_post/home_icon.svg' %}">
+            </div>
+        </a>
+        <a href="{% url 'ask' %}">
+            <div class="ask_but">
+                <h5>Ask</h5>
+                <img src="{% static 'img/ans_post/ask_icon.svg' %}">
+            </div>
+        </a>
+        <a href="{% url 'answer_page'%}">
+            <div class="ans_but">
+                <h5>Answer</h5>
+                <img src="{% static 'img/ans_post/answer_icon.svg' %}">
+            </div>
+        </a>
+        <a href="{% url 'notf' %}">
+            <div class="notf">
+                <h5>Notifications</h5>
+            </div>
+        </a>
+        <div class="image">
+            <img src="{% static 'img/ans_post/draw.svg' %}">
+        </div>
+    </div>
+    <div class="ans_post_box">
+        <div class="information">
+            <h4>Write your answer:</h4>
+            <ul>
+                <li>Let your answer be to the point.</li>
+                <li>Spelling, grammar and punctuation are important!</li>
+            </ul>
+        </div>
+        <div class="ans_post_box">
+            <div class="ques_show">
+                <h4>Question:</h6>
+                <h6>{{ que.q_text }}</h6>
+                {% if  img == "abc" %}
+                {% else %}
+                    <img src="{{ img.img_link }}">
+                {% endif %}
+            </div>
+            <form method="post" action="">
+                {% csrf_token %}
+                <textarea rows = "5" cols = "60" name = "ansBox" class="ansWriteBox"></textarea>
+                <h5>Image link</h5>
+                <input type="url" class="link_in" name="lin">
+                <input type="submit" class="btn" value="submit">
+            </form>
+        </div>
+    </div>
+    <footer>
+        <div class="footerpart">
+            <img src="{% static 'img/shome/co_logo.svg' %}">
+            <img src="{% static 'img/shome/follow.svg' %}">
+        </div>
+    </footer>
+</body>
+</html>

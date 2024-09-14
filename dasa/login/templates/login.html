@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Login Form</title>
+	<link href="https://fonts.googleapis.com/css?family=Poppins:600&display=swap" rel="stylesheet">
+	<script src="https://kit.fontawesome.com/a81368914c.js"></script>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+    {% load static %}
+	<link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+	<header>
+		<div class="headpart">
+			<img class="logo" src="{% static 'img/shome/c_log.png' %}">
+			<h1 class="title">Klan</h1>
+		</div>
+	</header>
+	<div class="container">
+		<div class="img">
+			<img src="{% static 'img/bg.svg' %}">
+		</div>
+		<div class="login-content">
+			<form action="{% url 'check' %}"  method="POST">
+                {% csrf_token %}
+				<h2 class="title">Welcome</h2>
+				<div class="c1">
+					<input name="sel" value="student" type="radio" checked="checked">Student
+					<img class="stu" src="{% static 'img/stu.svg' %}">
+					<input name="sel" value="professor" type="radio">Professor
+					<img class="prof" src="{% static 'img/prof.svg' %}">
+				</div>
+				<div class="input-div one">
+           		   <div class="i">
+           		   		<i class="fas fa-user"></i>
+           		   </div>
+           		   <div class="div">
+           		   		<h5>Username</h5>
+           		   		<input type="text" class="input" name="username">
+           		   </div>
+           		</div>
+           		<div class="input-div pass">
+           		   <div class="i"> 
+           		    	<i class="fas fa-lock"></i>
+           		   </div>
+           		   <div class="div">
+           		    	<h5>Password</h5>
+           		    	<input type="password" class="input" name="passwd">
+            	   </div>
+            	</div>
+            	<a href="{% url 'login' %}">Forgot Password?</a>
+            	<input type="submit" class="btn" value="Login">
+            </form>
+        </div>
+    </div>
+	<footer>
+		<div class="footerpart">
+			<img src="{% static 'img/shome/co_logo.svg' %}">
+			<img src="{% static 'img/shome/follow.svg' %}">
+		</div>
+	</footer>
+    <script>
+		const inputs = document.querySelectorAll(".input");
+
+
+		function addcl(){
+			let parent = this.parentNode.parentNode;
+			parent.classList.add("focus");
+		}
+
+		function remcl(){
+			let parent = this.parentNode.parentNode;
+			if(this.value == ""){
+				parent.classList.remove("focus");
+			}
+		}
+
+
+		inputs.forEach(input => {
+			input.addEventListener("focus", addcl);
+			input.addEventListener("blur", remcl);
+		});
+	</script>
+</body>
+</html>

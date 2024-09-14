@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>KLAN</title>
+    </head>
+    <body>
+        {% load static %}
+        <header>
+            <div class="headpart">
+                <img class="logo" src="{% static 'img/ask/c_log.png' %}">
+                <h1 class="title">Klan</h1>
+                <img class="profile_icon" src="{% static 'img/ask/pro.png' %}">
+            </div>
+        </header>
+        <div class="menu_bar">
+            <a href="{% url 'home'}">
+                <div class="home_but">
+                    <h5>Home</h5>
+                    <img class="home_icon" src="{% static 'img/ask/home_icon.svg' %}">
+                </div>
+            </a>
+            <div class="ask_but">
+                <h5>Ask</h5>
+                <img src="{% static 'img/ask/ask_icon.svg' %}">
+            </div>
+            <a href="{% url 'answer_page'%}">
+                <div class="ans_but">
+                    <h5>Answer</h5>
+                    <img src="{% static 'img/ask/answer_icon.svg' %}">
+                </div>
+            </a>
+            <a href="{% url 'notf' %}">
+                <div class="notf">
+                    <h5>Notifications</h5>
+                </div>
+            </a>
+            <div class="image">
+                <img src="{% static 'img/ask/img.svg' %}">
+            </div>
+        </div>
+        <div class="ask_box">
+            <h3>ASK</h3>
+            <div class="pointToRemember">
+                <h4>point To Remember</h4>
+                <ul>
+                    <li>Take a while to check whether your question has not been asked already</li>
+                    <li>Spelling, grammar and punctuation are important!</li>
+                    <li>Try to sum up your Question in a sentence</li>
+                </ul>
+            </div>
+            <div class="ask_here">
+                <form method="post" action="">
+                    {% csrf_token %}
+                    <textarea rows = "5" cols = "60" name = "ansBox" class="ansWriteBox"></textarea>
+                    <select name="dom" class="domain_sele">
+                        <option value="lang">Lang</option>
+                        <option value="phy">Phy</option>
+                        <option value="chem">chem</option>
+                        <option value="maths">maths</option>
+                        <option value="eng">English</option>
+                    </select>
+                    <h5>Image link</h5>
+                    <input type="url" class="link_in" name="lin">
+                    <input type="submit" class="btn" value="submit">
+                </form>
+            </div>
+        </div>
+        <footer>
+            <div class="footerpart">
+                <img src="{% static 'img/ask/co_logo.svg' %}">
+                <img src="{% static 'img/ask/follow.svg' %}">
+            </div>
+        </footer>
+    </body>
+</html>

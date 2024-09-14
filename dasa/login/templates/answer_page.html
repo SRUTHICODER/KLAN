@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>KLAN</title>
+    </head>
+    <body>
+        {% load static %}
+        <header>
+            <div class="headpart">
+                <img class="logo" src="{% static 'img/shome/c_log.png' %}">
+                <h1 class="title">Klan</h1>
+                <img class="profile_icon" src="{% static 'img/shome/pro.png' %}">
+            </div>
+        </header>
+        <div class="menu_bar">
+            <a href="{% url 'home'}">
+                <div class="home_but">
+                    <h5>Home</h5>
+                    <img class="home_icon" src="{% static 'img/shome/home_icon.svg' %}">
+                </div>
+            </a>
+            <a href="{% url 'ask' %}">
+                <div class="ask_but">
+                    <h5>Ask</h5>
+                    <img src="{% static 'img/shome/ask_icon.svg' %}">
+                </div>
+            </a>
+            <div class="ans_but">
+                <h5>Answer</h5>
+                <img src="{% static 'img/shome/answer_icon.svg' %}">
+            </div>
+            <a href="{% url 'notf' %}">
+                <div class="notf">
+                    <h5>Notifications</h5>
+                </div>
+            </a>
+            <div class="image">
+                <img src="{% static 'img/shome/draw.svg' %}">
+            </div>
+        </div>
+        <div class="qpbna_display">
+            <div class="filter">
+                <form method="post" action="{%  url 'filt' %}" name="formsub">
+                    {% csrf_token %}
+                    <select name="filter_dept" class="filt_dept" onchange="formsub.submit()">
+                        <option value="dept" selected >dept</option>
+                        <option value="cs">cs</option>
+                        <option value="IT">it</option>
+                        <option value="eee">eee</option>
+                        <option value="ece">ece</option>
+                        <option value="me">me</option>
+                        <option value="mc">mc</option>
+                        <option value="bio">bio</option>
+                        <option value="ft">ft</option>
+                        <option value="ei">ei</option>
+                        <option value="ai">ai</option>
+                        <option value="ise">ise</option>
+                        <option value="ci">ci</option>
+                        <option value="areo">areo</option>
+                    </select>
+                    <select name="filter_domain" class="filt_domain" onchange="formsub.submit()">
+                        <option value="domain" selected >domain</option>
+                        <option value="lang">lang</option>
+                        <option value="maths">maths</option>
+                        <option value="phy">phy</option>
+                        <option value="chem">chem</option>
+                        <option value="eng">eng</option>
+                    </select>
+                </form>
+            </div>
+            <ul>
+                <li>Questions to be Answered:</li>
+                {% for que in ques %}
+                <div class="qpnba_set">
+                    <li>
+                        <a href="{% url 'answer1' que.q_id.q_id %}">
+                            <div class="qpbna_box">
+                                <div class="qp_top">
+                                    <h4>{{ que.q_id.s_id.s_fname}} {{ que.q_id.s_id.r_no }}</h4>
+                                    <h4>{{ que.q_id.time }}</h4>
+                                </div>
+                                <div class="qp_filter">
+                                    <h4>{{ que.q_id.s_id.dept}} {{ que.q_id.domain }}</h4>
+                                </div>
+                                <div class="qp_text">
+                                    <h4>{{ que.q_id.q_text }}</h4>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                </div>
+                {% endfor %}
+            </ul>
+        </div>
+        <footer>
+            <div class="footerpart">
+                <img src="{% static 'img/shome/co_logo.svg' %}">
+                <img src="{% static 'img/shome/follow.svg' %}">
+            </div>
+        </footer>
+    </body>
+</html>

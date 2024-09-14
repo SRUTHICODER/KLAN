@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>home</title>
+    </head>
+    <body>
+        {% load static %}
+        <header>
+            <div class="headpart">
+                <img class="logo" src="{% static 'img/shome/c_log.png' %}">
+                <h1 class="title">Klan</h1>
+                <img class="profile_icon" src="{% static 'img/shome/pro.png' %}">
+            </div>
+        </header>
+        <div class="profile_bar">
+            <ul>
+                <li>{{ pro.p_Fname }} {{ pro.dept }}</li>
+                <li><a href="{% url 'logout' %}">Logout</a></li>
+            </ul>
+        </div>
+        <div class="menu_barp">
+            <div class="home_butp"><a href="{% url 'prohome' %}">
+                <h5>Home</h5>
+                <img class="home_icon" src="{% static 'img/shome/home_icon.svg' %}"></a>
+            </div>
+            <div class="ans_butp">
+                <h5>Verify answer</h5>
+                <img class="ans_iconp" src="{% static 'img/shome/home_icon.svg' %}">
+            </div>
+        </div>
+        <div class="question_verify_box">
+            <ul>
+            {% for que in question %}
+                {% if que.q_id.domain == pro.domain %}
+                    <li><a href="{% url 'ansver' que.q_id.q_id %}">
+                        <h3>{{ que.q_id.s_id.s_fname }} {{que.q_id.s_id.r_no }}</h3>
+                        <h3>{{ que.q_id.q_text }}</h3>
+                    </li></a>
+                {% endif %}
+            {% endfor %}
+            </ul>
+        </div>
+        <footer>
+            <div class="footerpart">
+                <img src="{% static 'img/shome/co_logo.svg' %}">
+                <img src="{% static 'img/shome/follow.svg' %}">
+            </div>
+        </footer>
+    </body>
+</html>

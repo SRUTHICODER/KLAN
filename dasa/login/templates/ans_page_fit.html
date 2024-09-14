@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>KLAN</title>
+    </head>
+    <body>
+        {% load static %}
+        <header>
+            <div class="headpart">
+                <img class="logo" src="{% static 'img/shome/c_log.png' %}">
+                <h1 class="title">Klan</h1>
+                <img class="profile_icon" src="{% static 'img/shome/pro.png' %}">
+            </div>
+        </header>
+        <div class="menu_bar">
+            <div class="home_but">
+                <h5>Home</h5>
+                <img class="home_icon" src="{% static 'img/shome/home_icon.svg' %}">
+            </div>
+            <a href="{% url 'ask' %}">
+                <div class="ask_but">
+                    <h5>Ask</h5>
+                    <img src="{% static 'img/shome/ask_icon.svg' %}">
+                </div>
+            </a>
+            <a href="{% url 'answer_page'%}">
+                <div class="ans_but">
+                    <h5>Answer</h5>
+                    <img src="{% static 'img/shome/answer_icon.svg' %}">
+                </div>
+            </a>
+            <a href="{% url 'notf' %}">
+                <div class="notf">
+                    <h5>Notifications</h5>
+                </div>
+            </a>
+            <div class="image">
+                <img src="{% static 'img/shome/draw.svg' %}">
+            </div>
+        </div>
+        <div class="qpbna_display">
+            <div class="filter">
+                <form method="post" action="filt" name="formsub">
+                    {% csrf_token %}
+                    <select name="filter_dept" class="filt_dept" onchange="formsub.submit()">
+                        {% if dept == "dept" %}
+                            <option value="dept" selected >dept</option>
+                        {% else %}
+                            <option value="dept">dept</option>
+                        {% endif %}
+                        {% if dept == "cs" %}
+                            <option value="cs" selected >cs</option>
+                        {% else %}
+                            <option value="cs">cs</option>
+                        {% endif %}
+                        {% if dept == "IT" %}
+                            <option value="IT" selected >it</option>
+                        {% else %}
+                            <option value="IT">it</option>
+                        {% endif %}
+                        {% if dept == "eee" %}
+                            <option value="eee" selected >eee</option>
+                        {% else %}
+                            <option value="eee">eee</option>
+                        {% endif %}
+                        {% if dept == "ece" %}
+                            <option value="ece" selected >ece</option>
+                        {% else %}
+                            <option value="ece">ece</option>
+                        {% endif %}
+                        {% if dept == "me" %}
+                            <option value="me" selected >me</option>
+                        {% else %}
+                            <option value="me">me</option>
+                        {% endif %}
+                        {% if dept == "mc" %}
+                            <option value="mc" selected >mc</option>
+                        {% else %}
+                            <option value="mc">mc</option>
+                        {% endif %}
+                        {% if dept == "bio" %}
+                            <option value="bio" selected >bio</option>
+                        {% else %}
+                            <option value="bio">bio</option>
+                        {% endif %}
+                        {% if dept == "ft" %}
+                            <option value="ft" selected >ft</option>
+                        {% else %}
+                            <option value="ft">ft</option>
+                        {% endif %}
+                        {% if dept == "ei" %}
+                            <option value="ei" selected >ei</option>
+                        {% else %}
+                            <option value="ei">ei</option>
+                        {% endif %}
+                        {% if dept == "ai" %}
+                            <option value="ai" selected >ai</option>
+                        {% else %}
+                            <option value="ai">ai</option>
+                        {% endif %}
+                        {% if dept == "ise" %}
+                            <option value="ise" selected >ise</option>
+                        {% else %}
+                            <option value="ise">ise</option>
+                        {% endif %}
+                        {% if dept == "ci" %}
+                            <option value="ci" selected >ci</option>
+                        {% else %}
+                            <option value="ci">ci</option>
+                        {% endif %}
+                        {% if dept == "aero" %}
+                            <option value="aero" selected >aero</option>
+                        {% else %}
+                            <option value="aero">aero</option>
+                        {% endif %}
+                    </select>
+                    <select name="filter_domain" class="filt_domain" onchange="formsub.submit()">
+                        {% if domain == "domain" %}
+                            <option value="domain" selected >domain</option>
+                        {% else %}
+                            <option value="domain">domain</option>
+                        {% endif %}
+                        {% if domain == "lang" %}
+                            <option value="lang" selected >lang</option>
+                        {% else %}
+                            <option value="lang">lang</option>
+                        {% endif %}
+                        {% if domain == "maths" %}
+                            <option value="maths" selected >maths</option>
+                        {% else %}
+                            <option value="maths">maths</option>
+                        {% endif %}
+                        {% if domain == "phy" %}
+                            <option value="phy" selected >phy</option>
+                        {% else %}
+                            <option value="phy">phy</option>
+                        {% endif %}
+                        {% if domain == "chem" %}
+                            <option value="chem" selected >chem</option>
+                        {% else %}
+                            <option value="chem">chem</option>
+                        {% endif %}
+                        {% if domain == "eng" %}
+                            <option value="eng" selected >eng</option>
+                        {% else %}
+                            <option value="domain">domain</option>
+                        {% endif %}
+                    </select>
+                </form>
+            </div>
+            <ul>
+                <li>Questions to be Answered:</li>
+                {% for que in ques %}
+                    {% if que.q_id.s_id.dept == dept or que.q_id.domain == domain %}
+                        <div class="qpnba_set">
+                            <li>
+                                <a href="{% url 'answer1' que.q_id.q_id %}">
+                                    <div class="qpbna_box">
+                                        <div class="qp_top">
+                                            <h4>{{ que.q_id.s_id.s_fname}} {{ que.q_id.s_id.r_no }}</h4>
+                                            <h4>{{ que.q_id.time }}</h4>
+                                        </div>
+                                        <div class="qp_filter">
+                                            <h4>{{ que.q_id.s_id.dept}} {{ que.q_id.domain }}</h4>
+                                        </div>
+                                        <div class="qp_text">
+                                            <h4>{{ que.q_id.q_text }}</h4>
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+        </div>
+        <footer>
+            <div class="footerpart">
+                <img src="{% static 'img/shome/co_logo.svg' %}">
+                <img src="{% static 'img/shome/follow.svg' %}">
+            </div>
+        </footer>
+    </body>
+</html>

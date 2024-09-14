@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KLAN</title>
+</head>
+<body>
+    {% load static %}
+    <header>
+        <div class="headpart">
+            <img class="logo" src="{% static 'img/ans_post/c_log.png' %}">
+            <h1 class="title">Klan</h1>
+            <img class="profile_icon" src="{% static 'img/ans_post/pro.png' %}">
+        </div>
+    </header>
+    <div class="profile_bar">
+        <ul>
+            <li>{{ data.s_fname }} {{ data.r_no }}</li>
+            <li><a href="{% url 'liba' %}">Library</a></li>
+            <li><a href="{% url 'logout' %}">Log out</a></li>
+
+        </ul>
+    </div>
+    <div class="menu_bar">
+        <div class="home_but">
+            <h5>Home</h5>
+            <img class="home_icon" src="{% static 'img/ans_post/home_icon.svg' %}">
+        </div>
+        <a href="{% url 'ask' %}">
+            <div class="ask_but">
+                <h5>Ask</h5>
+                <img src="{% static 'img/ans_post/ask_icon.svg' %}">
+            </div>
+        </a>
+        <a href="{% url 'answer_page'%}">
+            <div class="ans_but">
+                <h5>Answer</h5>
+                <img src="{% static 'img/ans_post/answer_icon.svg' %}">
+            </div>
+        </a>
+        <a href="{% url 'notf' %}">
+            <div class="notf">
+                <h5>Notifications</h5>
+            </div>
+        </a>
+        <div class="image">
+            <img src="{% static 'img/ans_post/draw.svg' %}">
+        </div>
+    </div>
+    <div class="question_show_details">
+        <div class="question_showing_box">
+            <h4>QUESTION</h4>
+            <div class="ques_set">
+                <h6>{{ ques.s_id.s_fname }} {{ ques.s_id.r_no }}</h6>
+                <h6>{{ ques.s_id.dept }} {{ ques.domain }}</h6>
+                <h4>{{ques.q_text}}</h4>
+                {% if q_img == "ans" %}
+                {% else %}
+                    <img src="{{ q_img }}">
+                {% endif %}
+            </div>
+            {% for al in ver %}
+                <div class="ans_set_v">
+                    <h6>{{ al.a_id.s_id.s_fname }}{{ al.a_id.s_id.r_no }}</h6>
+                    <h4>{{ al.a_id.a_text }}</h4>
+                    {% for a in a_img %}
+                        {% if a.a_id == al.a_id %} 
+                            <img src="{{ a.img_link }}">
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            {% endfor %}
+            {% for an in ans %}
+                <div class="ans_set">
+                    <h6>{{ an.s_id.s_fname }}{{ an.s_id.r_no }}</h6>
+                    <h4>{{ an.a_text }}</h4>
+                    {% for a in a_img %}
+                        {% if a.a_id == an %} 
+                            <img src="{{ a.img_link }}">
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            {% endfor %}
+            <form action="{% url 'save' %}" method="POST">
+                {% csrf_token %}
+                <input type="number" value="{{ ques.q_id }}" hidden name="i">
+                <button type="submit">save</button>
+            </form>
+        </div>
+    </div>
+    <footer>
+        <div class="footerpart">
+            <img src="{% static 'img/shome/co_logo.svg' %}">
+            <img src="{% static 'img/shome/follow.svg' %}">
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>home</title>
+    </head>
+    <body>
+        {% load static %}
+        <header>
+            <div class="headpart">
+                <img class="logo" src="{% static 'img/shome/c_log.png' %}">
+                <h1 class="title">Klan</h1>
+                <img class="profile_icon" src="{% static 'img/shome/pro.png' %}">
+            </div>
+        </header>
+        <div class="profile_bar">
+            <ul>
+                <li>{{ pro.p_Fname }} {{ pro.dept }}</li>
+                <li><a href="{% url 'logout' %}">Logout</a></li>
+            </ul>
+        </div>
+        <div class="menu_barp">
+            <div class="home_butp"><a href="{% url 'prohome' %}">
+                <h5>Home</h5>
+                <img class="home_icon" src="{% static 'img/shome/home_icon.svg' %}"></a>
+            </div>
+            <div class="ans_butp">
+                <h5>Verify answer</h5>
+                <img class="ans_iconp" src="{% static 'img/shome/home_icon.svg' %}">
+            </div>
+        </div>
+        <div class="question_verify_box">
+           <div class="question_Set">
+                <h5>{{ question.s_id.s_fname }}{{ question.s_id.r_no }}</h5>
+                <h3>{{ question.q_text }}</h3>
+           </div>
+           <form action="" method="POST" name="ansvering">
+                {% csrf_token %}
+                <ul>
+                    {% for an in ans %}
+                        <li>
+                            <input type="radio" value="{{ an.a_id }}" required name="j">
+                            <h5>{{ an.s_id.s_fname }} {{an.s_id.r_no }}</h5>
+                            <h3>{{ an.a_text }}</h3>
+                            {% for img in ansimg %}
+                                {% if img.a_id == an %}
+                                    <img src="{{img.img_link }}">
+                                {% endif %}
+                            {% endfor %}
+                        </li>
+                    {% endfor %}
+                    <input type="number" value="{{ question.q_id }}" hidden name="i">
+                    <button type="submit" formaction="{% url 'aa' %}">Agree</button>
+                    <button type="submit" formaction="{% url 'ad' %}">Disagree</button>
+                </ul>
+           </form>
+        </div>
+        <footer>
+            <div class="footerpart">
+                <img src="{% static 'img/shome/co_logo.svg' %}">
+                <img src="{% static 'img/shome/follow.svg' %}">
+            </div>
+        </footer>
+    </body>
+</html>
